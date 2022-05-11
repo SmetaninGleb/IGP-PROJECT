@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: PlayerMovementConfig
   m_EditorClassIdentifier: 
   _speed: 5
-  _sideRange: 5
+  _sideRange: 3
   _sideMovingMultiplyer: 3

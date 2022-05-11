@@ -25,6 +25,9 @@ public class FinishStepsSystem : IEcsRunSystem
                 EcsPool<MultiplyPointsSignal> multiplyPool = world.GetPool<MultiplyPointsSignal>();
                 ref MultiplyPointsSignal multiplySignal = ref multiplyPool.Add(multiplyerEntity);
                 multiplySignal.Multiplyer = step.Multiplyer;
+                EcsPool<HasFinishedSignal> finishedPool = world.GetPool<HasFinishedSignal>();
+                int finishedEntity = world.NewEntity();
+                finishedPool.Add(finishedEntity);
             }
         }
     }

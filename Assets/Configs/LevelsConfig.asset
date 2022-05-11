@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pointsForFirstLevel: 10
   _levelIncreasingPointsMultiplyer: 2
-  _firstLevelsIndexes: 
-  _loopedLevelsIndexes: 00000000
+  _firstLevelsIndexes: 0000000001000000
+  _loopedLevelsIndexes: 0200000003000000

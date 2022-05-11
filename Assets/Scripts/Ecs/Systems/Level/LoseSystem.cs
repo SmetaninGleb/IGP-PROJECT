@@ -31,7 +31,8 @@ public class LoseSystem : IEcsInitSystem, IEcsRunSystem
     private void ProcessLoseChecking(EcsSystems systems)
     {
         EcsWorld world = systems.GetWorld();
-        if (_playerStack.Stack.Count == 0)
+        EcsFilter finishedFilter = world.Filter<HasFinishedSignal>().End();
+        if (_playerStack.Stack.Count == 0 && finishedFilter.GetEntitiesCount() == 0)
         {
             _loseScreen.gameObject.SetActive(true);
             int stopPlayerEntity = world.NewEntity();

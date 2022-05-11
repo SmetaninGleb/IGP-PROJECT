@@ -70,5 +70,8 @@ public class MainPathMovingSystem : IEcsInitSystem, IEcsRunSystem
         ref FinishCurveSignal signal = ref pool.Add(entity);
         signal.Curve = followerComponent.Path;
         signal.Follower = followerComponent.Follower;
+        EcsPool<StopPlayerSignal> stopPlayerPool = world.GetPool<StopPlayerSignal>();
+        int stopEntity = world.NewEntity();
+        stopPlayerPool.Add(stopEntity);
     }
 }

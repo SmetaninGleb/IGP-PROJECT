@@ -10,17 +10,17 @@ public class LevelsConfig : ScriptableObject
     [SerializeField] private List<int> _firstLevelsIndexes;
     [SerializeField] private List<int> _loopedLevelsIndexes;
 
-    public Scene GetLevel(int levelNumber)
+    public int GetLevelIndex(int levelNumber)
     {
-        if (levelNumber < _firstLevelsIndexes.Count)
+        if (levelNumber <= _firstLevelsIndexes.Count)
         {
-            return SceneManager.GetSceneByBuildIndex(_firstLevelsIndexes[levelNumber - 1]);
+            return _firstLevelsIndexes[levelNumber - 1];
         }
-        return SceneManager.GetSceneByBuildIndex(_loopedLevelsIndexes[(levelNumber - 1) % _loopedLevelsIndexes.Count]);
+        return _loopedLevelsIndexes[(levelNumber - 1) % _loopedLevelsIndexes.Count];
     }
 
     public int GetPointsForLevel(int levelNumber)
     {
-        return (int)(_pointsForFirstLevel * Mathf.Pow(_levelIncreasingPointsMultiplyer, levelNumber));
+        return (int)(_pointsForFirstLevel * Mathf.Pow(_levelIncreasingPointsMultiplyer, levelNumber-1));
     }
 }

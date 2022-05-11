@@ -58,6 +58,7 @@ public class PlayerCubeStack : MonoBehaviour
             {
                 cube.transform.parent = null;
                 cube.PlayerCubeStack = null;
+                _height -= cube.Height;
                 _stack.Remove(cube);
                 break;
             }

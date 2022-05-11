@@ -12,6 +12,7 @@ public class PlayerSideMovementSystem : IEcsRunSystem
 
     public void Run(EcsSystems systems)
     {
+        if (ShouldStop(systems)) return;
         EcsWorld world = systems.GetWorld();
         EcsPool<CurveFollowerComponent> pool = world.GetPool<CurveFollowerComponent>();
         EcsFilter curveFollowerFilter = world.Filter<CurveFollowerComponent>().End();
@@ -28,5 +29,12 @@ public class PlayerSideMovementSystem : IEcsRunSystem
             Vector3 clampedFromLine = Vector3.ClampMagnitude(fromLine, _config.SideRange);
             cfTransform.position = linePoint + clampedFromLine;
         }
+    }
+
+    private bool ShouldStop(EcsSystems systems)
+    {
+        EcsWorld world = systems.GetWorld();
+        EcsFilter stopPlayerFilter = world.Filter<StopPlayerSignal>().End();
+        return stopPlayerFilter.GetEntitiesCount() != 0;
     }
 }

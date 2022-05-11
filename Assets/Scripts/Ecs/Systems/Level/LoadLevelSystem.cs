@@ -1,13 +1,18 @@
 ﻿using Leopotam.EcsLite;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LoadLevelSystem : IEcsRunSystem
 {
     private LevelsConfig _levelsConfig;
 
-    public LoadLevelSystem(LevelsConfig levelsConfig)
+    public LoadLevelSystem(LevelsConfig levelsConfig, PlayerPrefsConfig prefsConfig)
     {
         _levelsConfig = levelsConfig;
+        if (!PlayerPrefs.HasKey(prefsConfig.LevelNumberPrefsName))
+        {
+            PlayerPrefs.SetInt(prefsConfig.LevelNumberPrefsName, 1);
+        }
     }
 
     public void Run(EcsSystems systems)
@@ -18,8 +23,8 @@ public class LoadLevelSystem : IEcsRunSystem
         foreach (int entity in loadSignalFilter)
         {
             int levelNum = loadSignalPool.Get(entity).LevelNumber;
-            Scene levelToLoad = _levelsConfig.GetLevel(levelNum);
-            SceneManager.LoadScene(levelToLoad.buildIndex);
+            int levelIndexToLoad = _levelsConfig.GetLevelIndex(levelNum);
+            SceneManager.LoadScene(levelIndexToLoad);
             break;
         }
     }
